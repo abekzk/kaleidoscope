@@ -1,3 +1,5 @@
+// 万華鏡プログラム
+
 ArrayList<BeautifulObject> beautifulObjects;
 
 void setup() {
@@ -13,5 +15,5 @@ void draw() {
 }
 
 void mousePressed() {
-  beautifulObjects.add(new BeautifulObject(mouseX, mouseY, "o", 100));
+  beautifulObjects.add(new BeautifulObject(mouseX, mouseY, "d", 100, color(255, 0, 0)));
 }
