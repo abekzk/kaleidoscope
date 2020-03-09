@@ -8,10 +8,12 @@ boolean isEdit = false;
 void setup() {
   size(600, 600, P2D);
   beautifulObjects = new ArrayList<BeautifulObject>();
+
   mirrorTexture = createGraphics(width, height);
   for (int i = 0; i < 5; i++) {
     beautifulObjects.add(new BeautifulObject());
   }
+
   int r = 150;
   for (int i = 0; i < 6; i++) {
     int rad = 90 + 60 * i;
@@ -37,13 +39,18 @@ void draw() {
 
 void mousePressed() {
   if (isEdit) {
-    beautifulObjects.add(new BeautifulObject(mouseX, mouseY, "d", 50, color(255, 0, 0)));
+    beautifulObjects.add(new BeautifulObject(mouseX, mouseY));
   }
 }
 
 void keyPressed() {
   if (key == ' ') {
     isEdit = !isEdit;
+  }
+  if (key == 'a') {
+    if (isEdit) {
+      beautifulObjects.add(new BeautifulObject());
+    }
   }
 }
 

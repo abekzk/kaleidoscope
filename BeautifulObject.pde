@@ -15,9 +15,19 @@ class BeautifulObject {
   
   BeautifulObject() {
     this.x = int(random(50, width - 50));
-    this.y = int(random(50, height - 50)); 
-    this.shape = "o";
-    this.size = int(random(100, 200));
+    this.y = int(random(50, height - 50));
+    String[] shapes = {"o", "d"};
+    this.shape = shapes[int(random(shapes.length))];
+    this.size = int(random(80, 180));
+    this.c = color(int(random(256)), int(random(256)), int(random(256)));
+  }
+  
+  BeautifulObject(int x, int y) {
+    this.x = x;
+    this.y = y;
+    String[] shapes = {"o", "d"};
+    this.shape = shapes[int(random(shapes.length))];
+    this.size = int(random(80, 180));
     this.c = color(int(random(256)), int(random(256)), int(random(256)));
   }
 
