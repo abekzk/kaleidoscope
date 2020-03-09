@@ -21,17 +21,17 @@ class BeautifulObject {
     this.c = color(int(random(256)), int(random(256)), int(random(256)));
   }
 
-  void display(PGraphics mirror) {
-    mirror.fill(c);
-    mirror.noStroke();
-    int x = this.x - mirror.width / 2;
-    int y = this.y - mirror.height / 2;
+  void display(PGraphics texture) {
+    texture.fill(c);
+    texture.noStroke();
+    int x = this.x - texture.width / 2;
+    int y = this.y - texture.height / 2;
     if (shape == "o") {
-      mirror.ellipse(x, y, size / 2, size / 2);
+      texture.ellipse(x, y, size / 2, size / 2);
     }
     else if (shape == "d") {
       int r = size / 2;
-      mirror.quad(x, y - r, x + r, y, x, y + r, x - r, y);
+      texture.quad(x, y - r, x + r, y, x, y + r, x - r, y);
     }
   }
 

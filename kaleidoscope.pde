@@ -3,6 +3,7 @@
 ArrayList<BeautifulObject> beautifulObjects;
 PGraphics mirrorTexture;
 Mirror[] mirrors = new Mirror[6];
+boolean isEdit = false;
 
 void setup() {
   size(600, 600, P2D);
@@ -23,23 +24,36 @@ void setup() {
 
 void draw() {
   background(255);
-  // テクスチャーをアニメーションさせる
-  textureAnnimation();
-  // ミラーを表示
-  for (Mirror mirror:mirrors) {
-    mirror.display();
+  textureDraw();
+  if (isEdit) {
+    image(mirrorTexture, 0, 0);
+  }else {
+    // ミラーを表示
+    for (Mirror mirror:mirrors) {
+      mirror.display();
+    }
   }
 }
 
 void mousePressed() {
-  beautifulObjects.add(new BeautifulObject(mouseX, mouseY, "d", 50, color(255, 0, 0)));
+  if (isEdit) {
+    beautifulObjects.add(new BeautifulObject(mouseX, mouseY, "d", 50, color(255, 0, 0)));
+  }
 }
 
-void textureAnnimation() {
+void keyPressed() {
+  if (key == ' ') {
+    isEdit = !isEdit;
+  }
+}
+
+void textureDraw() {
   mirrorTexture.beginDraw();
   mirrorTexture.background(255);
   mirrorTexture.translate(mirrorTexture.width / 2, mirrorTexture.height / 2);
-  mirrorTexture.rotate(radians(millis() / 10 % 360));
+  if (!isEdit) {
+    mirrorTexture.rotate(radians(millis() / 10 % 360));
+  }
   for (BeautifulObject obj:beautifulObjects) {
     obj.display(mirrorTexture);
   }
