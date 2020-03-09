@@ -15,23 +15,33 @@ class BeautifulObject {
   
   BeautifulObject() {
     this.x = int(random(50, width - 50));
-    this.y = int(random(50, height - 50)); 
-    this.shape = "o";
-    this.size = int(random(100, 200));
+    this.y = int(random(50, height - 50));
+    String[] shapes = {"o", "d"};
+    this.shape = shapes[int(random(shapes.length))];
+    this.size = int(random(80, 180));
+    this.c = color(int(random(256)), int(random(256)), int(random(256)));
+  }
+  
+  BeautifulObject(int x, int y) {
+    this.x = x;
+    this.y = y;
+    String[] shapes = {"o", "d"};
+    this.shape = shapes[int(random(shapes.length))];
+    this.size = int(random(80, 180));
     this.c = color(int(random(256)), int(random(256)), int(random(256)));
   }
 
-  void display(PGraphics mirror) {
-    mirror.fill(c);
-    mirror.noStroke();
-    int x = this.x - mirror.width / 2;
-    int y = this.y - mirror.height / 2;
+  void display(PGraphics texture) {
+    texture.fill(c);
+    texture.noStroke();
+    int x = this.x - texture.width / 2;
+    int y = this.y - texture.height / 2;
     if (shape == "o") {
-      mirror.ellipse(x, y, size / 2, size / 2);
+      texture.ellipse(x, y, size / 2, size / 2);
     }
     else if (shape == "d") {
       int r = size / 2;
-      mirror.quad(x, y - r, x + r, y, x, y + r, x - r, y);
+      texture.quad(x, y - r, x + r, y, x, y + r, x - r, y);
     }
   }
 
