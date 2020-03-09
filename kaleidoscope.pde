@@ -10,9 +10,9 @@ void setup() {
   beautifulObjects = new ArrayList<BeautifulObject>();
 
   mirrorTexture = createGraphics(width, height);
-  for (int i = 0; i < 5; i++) {
-    beautifulObjects.add(new BeautifulObject());
-  }
+  //for (int i = 0; i < 5; i++) {
+  //  beautifulObjects.add(new BeautifulObject());
+  //}
 
   int r = 150;
   for (int i = 0; i < 6; i++) {
@@ -25,7 +25,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(0);
   textureDraw();
   if (isEdit) {
     image(mirrorTexture, 0, 0);
