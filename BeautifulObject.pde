@@ -24,6 +24,8 @@ class BeautifulObject {
   void draw(PGraphics mirror) {
     mirror.fill(c);
     mirror.noStroke();
+    int x = this.x - mirror.width / 2;
+    int y = this.y - mirror.height / 2;
     if (shape == "o") {
       mirror.ellipse(x, y, size / 2, size / 2);
     }
