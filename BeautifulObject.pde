@@ -17,11 +17,11 @@ class BeautifulObject {
     this.x = int(random(50, width - 50));
     this.y = int(random(50, height - 50)); 
     this.shape = "o";
-    this.size = int(random(50, 100));
+    this.size = int(random(100, 200));
     this.c = color(int(random(256)), int(random(256)), int(random(256)));
   }
 
-  void draw(PGraphics mirror) {
+  void display(PGraphics mirror) {
     mirror.fill(c);
     mirror.noStroke();
     int x = this.x - mirror.width / 2;
