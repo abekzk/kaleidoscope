@@ -1,18 +1,26 @@
 class ObjectController {
+  
   PGraphics texture;
   ArrayList<BeautifulObject> beautifulObjects;
+  
   BeautifulObject targetObj = null;
   BeautifulObject ghostObj = null;
+  
   BeautifulObject[] uiObjs = {
     new BeautifulObject(30, 220, "o", 40, color(150)),
     new BeautifulObject(30, 320, "d", 40, color(150)),
     new BeautifulObject(30, 420, "s", 40, color(150)),
     new BeautifulObject(30, 520, "h", 40, color(150)),
   };
-  
+
+  PShape[] uiColors = {
+    createShape(RECT, 0, 0, 200, 200)
+  };
+   
   ObjectController() {
     texture = createGraphics(width, height);
     beautifulObjects = new ArrayList<BeautifulObject>();
+    println(uiColors[0].width);
   }
   
   void addObject(BeautifulObject obj) {
@@ -79,7 +87,7 @@ class ObjectController {
     int centerX = texture.width / 2;
     int centerY = texture.height / 2;
     texture.beginDraw();
-    texture.background(255, 1);
+    texture.background(255, 0);
     texture.translate(centerX, centerY);
     if (isAnnimation) {
       texture.rotate(radians(millis() / 10 % 360));
