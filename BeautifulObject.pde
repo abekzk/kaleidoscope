@@ -92,6 +92,14 @@ class BeautifulObject {
     shape.setFill(c);
   }
   
+  boolean isMouseOver() {
+    int r = size / 2;
+    if (mouseX > x - r && mouseX < x + r && mouseY > y - r && mouseY < y + r) {
+        return true;
+    }
+    return false;
+  }
+  
   void randomShape() {
     String[] types = {"o", "d", "s", "h"};
     this.type = types[int(random(types.length))];
