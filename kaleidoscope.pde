@@ -1,35 +1,25 @@
 // 万華鏡プログラム
 
-ArrayList<BeautifulObject> beautifulObjects;
-PGraphics mirrorTexture;
+ObjectController objectController;
 Mirror[] mirrors = new Mirror[6];
-boolean isEdit = false;
+boolean isEdit = true;
 
 void setup() {
   size(600, 600, P2D);
-  beautifulObjects = new ArrayList<BeautifulObject>();
-
-  mirrorTexture = createGraphics(width, height);
-  //for (int i = 0; i < 5; i++) {
-  //  beautifulObjects.add(new BeautifulObject());
-  //}
-
-  int r = 150;
-  for (int i = 0; i < 6; i++) {
-    int rad = 90 + 60 * i;
-    int x = int(width / 2 + r * cos(radians(rad)));
-    int y = int(height / 2 + r * sin(radians(rad)));
-    mirrors[i] = new TriangleMirror(x, y, r, 60 * i, mirrorTexture);
-  }
-
+  objectController = new ObjectController();
+  initMirror();  
 }
 
 void draw() {
-  background(0);
-  textureDraw();
+
   if (isEdit) {
-    image(mirrorTexture, 0, 0);
+    background(255);
+    objectController.drawTexture(false);
+    image(objectController.texture, 0, 0);
+    objectController.drawEditor();
   }else {
+    background(0);
+    objectController.drawTexture(true);
     // ミラーを表示
     for (Mirror mirror:mirrors) {
       mirror.display();
@@ -37,10 +27,16 @@ void draw() {
   }
 }
 
+void mouseDragged() {
+  objectController.moveSelectObject();
+}
+
 void mousePressed() {
-  if (isEdit) {
-    beautifulObjects.add(new BeautifulObject(mouseX, mouseY));
-  }
+  objectController.selectObject();
+}
+
+void mouseReleased() {
+  objectController.setObject();
 }
 
 void keyPressed() {
@@ -49,20 +45,17 @@ void keyPressed() {
   }
   if (key == 'a') {
     if (isEdit) {
-      beautifulObjects.add(new BeautifulObject());
+      objectController.addObject(new BeautifulObject());
     }
   }
 }
 
-void textureDraw() {
-  mirrorTexture.beginDraw();
-  mirrorTexture.background(255);
-  mirrorTexture.translate(mirrorTexture.width / 2, mirrorTexture.height / 2);
-  if (!isEdit) {
-    mirrorTexture.rotate(radians(millis() / 10 % 360));
+void initMirror() {
+  int r = 150;
+  for (int i = 0; i < 6; i++) {
+    int rad = 90 + 60 * i;
+    int x = int(width / 2 + r * cos(radians(rad)));
+    int y = int(height / 2 + r * sin(radians(rad)));
+    mirrors[i] = new TriangleMirror(x, y, r, 60 * i, objectController.texture);
   }
-  for (BeautifulObject obj:beautifulObjects) {
-    obj.display(mirrorTexture);
-  }
-  mirrorTexture.endDraw();
 }
