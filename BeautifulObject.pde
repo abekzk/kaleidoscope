@@ -14,36 +14,32 @@ class BeautifulObject {
     this.c = c;
     setShape();
   }
-  
-  BeautifulObject() {
-    this.x = int(random(50, width - 50));
-    this.y = int(random(50, height - 50));
-    randomShape();
-    setShape();
-  }
-  
+
   BeautifulObject(int x, int y) {
-    this.x = x;
-    this.y = y;
-    randomShape();
-    setShape();
+    this(x, y,
+      new String[]{"o", "d", "s", "h"}[int(random(4))],
+      int(random(80, 180)),
+      color(int(random(256)), int(random(256)), int(random(256)))
+    );
   }
-  
+
+  BeautifulObject() { this(int(random(50, width - 50)), int(random(50, height - 50))); }
+
   void setPos(int x, int y) {
     this.x = x;
     this.y = y;
   }
-  
+
   void setColor(color c) {
     this.c = c;
     shape.setFill(c);
   }
-  
+
   void setSize(int size) {
     this.size = size;
     setShape();
   }
-  
+
   void setType(String type) {
     this.type = type;
     setShape();
@@ -52,16 +48,16 @@ class BeautifulObject {
   void setShape() {
     noStroke();  // オブジェクトは基本的に輪郭線なし
     // 円
-    if (type == "o") {
+    if (type.equals("o")) {
       shape = createShape(ELLIPSE, 0, 0, size, size);
     }
     // ダイア
-    else if (type == "d") {
+    else if (type.equals("d")) {
       int r = size / 2;
       shape = createShape(QUAD, 0, -r, r, 0, 0, r, -r, 0);
     }
     // 星
-    else if (type == "s") {
+    else if (type.equals("s")) {
       int R;
       shape = createShape();
       shape.beginShape();
@@ -77,7 +73,7 @@ class BeautifulObject {
       shape.endShape(CLOSE);
     }
     // ハート
-    else if (type == "h") {
+    else if (type.equals("h")) {
       float R = (1.0 / 16.0) * (size / 2);
       shape = createShape();
       shape.beginShape();
@@ -94,17 +90,11 @@ class BeautifulObject {
   
   boolean isMouseOver() {
     int r = size / 2;
-    if (mouseX > x - r && mouseX < x + r && mouseY > y - r && mouseY < y + r) {
-        return true;
+    if (mouseX > x - r && mouseX < x + r &&
+        mouseY > y - r && mouseY < y + r) {
+      return true;
     }
     return false;
-  }
-  
-  void randomShape() {
-    String[] types = {"o", "d", "s", "h"};
-    this.type = types[int(random(types.length))];
-    this.size = int(random(80, 180));
-    this.c = color(int(random(256)), int(random(256)), int(random(256)));
   }
 
 }

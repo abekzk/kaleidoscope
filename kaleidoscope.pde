@@ -31,12 +31,13 @@ void draw() {
 }
 
 void mouseDragged() {
+  if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
   objectEditor.moveTargetObject();
   objectEditor.movePhantomObject();
 }
 
 void mousePressed() {
-  //objectController.selectObject();
+  if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
   objectEditor.selectTargetObject();
   objectEditor.selectPhantomObject();
 }
