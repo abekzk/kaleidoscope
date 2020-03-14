@@ -12,6 +12,7 @@ class TriangleMirror extends Mirror {
     s = createShape();
     s.beginShape();
     s.texture(texture);
+    s.stroke(50);
     for (int i = 0; i < 3; i++) {
       float theta = radians(rad - 90 + 120 * i);
       float thetaTexture = radians(0 - 90 + 120 * i);

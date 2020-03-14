@@ -1,12 +1,14 @@
 // 万華鏡プログラム
 
 ObjectController objectController;
+ObjectEditor objectEditor;
 Mirror[] mirrors = new Mirror[6];
 boolean isEdit = true;
 
 void setup() {
   size(600, 600, P2D);
   objectController = new ObjectController();
+  objectEditor = new ObjectEditor(objectController);
   initMirror();  
 }
 
@@ -16,7 +18,8 @@ void draw() {
     background(255);
     objectController.drawTexture(false);
     image(objectController.texture, 0, 0);
-    objectController.drawEditor();
+    objectEditor.display();
+    //objectController.drawEditor();
   }else {
     background(0);
     objectController.drawTexture(true);
@@ -28,15 +31,25 @@ void draw() {
 }
 
 void mouseDragged() {
-  objectController.moveSelectObject();
+  if (isEdit) {
+    if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
+    objectEditor.moveTargetObject();
+    objectEditor.movePhantomObject();
+  }
 }
 
 void mousePressed() {
-  objectController.selectObject();
+  if (isEdit) {
+    if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
+    objectEditor.selectTargetObject();
+    objectEditor.selectPhantomObject();
+  }
 }
 
 void mouseReleased() {
-  objectController.setObject();
+  if (isEdit) {
+    objectEditor.embodyPhantomObject();
+  }
 }
 
 void keyPressed() {
@@ -47,6 +60,9 @@ void keyPressed() {
     if (isEdit) {
       objectController.addObject(new BeautifulObject());
     }
+  }
+  if (key == 'd') {
+    objectEditor.removeTargetObject();
   }
 }
 
