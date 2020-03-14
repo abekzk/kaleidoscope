@@ -31,19 +31,25 @@ void draw() {
 }
 
 void mouseDragged() {
-  if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
-  objectEditor.moveTargetObject();
-  objectEditor.movePhantomObject();
+  if (isEdit) {
+    if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
+    objectEditor.moveTargetObject();
+    objectEditor.movePhantomObject();
+  }
 }
 
 void mousePressed() {
-  if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
-  objectEditor.selectTargetObject();
-  objectEditor.selectPhantomObject();
+  if (isEdit) {
+    if (objectEditor.changeObjectColor() || objectEditor.changeObjectSize()) return;
+    objectEditor.selectTargetObject();
+    objectEditor.selectPhantomObject();
+  }
 }
 
 void mouseReleased() {
-  objectEditor.embodyPhantomObject();
+  if (isEdit) {
+    objectEditor.embodyPhantomObject();
+  }
 }
 
 void keyPressed() {

@@ -30,7 +30,7 @@ class ObjectController {
     int centerX = texture.width / 2;
     int centerY = texture.height / 2;
     texture.beginDraw();
-    texture.background(255, 0);
+    texture.background(255);
     texture.translate(centerX, centerY);
     if (isAnnimation) {
       texture.rotate(radians(millis() / 10 % 360));

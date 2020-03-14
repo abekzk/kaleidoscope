@@ -26,10 +26,10 @@ class ObjectEditor {
       new BeautifulObject(30, 520, "h", 40, color(150)),
     };
     defaultColors = new color[]{
-      color(255, 0, 0),
-      color(0, 255, 0),
-      color(0, 0, 255),
-      color(255, 255, 0),
+      color(124, 252, 0),
+      color(51, 153, 255),
+      color(255, 204, 0),
+      color(255, 51, 51),
     };
     shapeDefaultColors = new HashMap<String, Integer>() {
       {
@@ -39,7 +39,6 @@ class ObjectEditor {
         put("h", defaultColors[3]);
       }
     };
-
     changeColorButtons = new UIButton[]{
       new UIButton(width - 50, 350, 45, 45, defaultColors[0]),
       new UIButton(width - 50, 420, 45, 45, defaultColors[1]),
@@ -51,6 +50,24 @@ class ObjectEditor {
   }
 
   void display() {
+
+    pushStyle();
+    stroke(220);
+    strokeWeight(3);
+    noFill();
+    ellipse(width / 2, height / 2, width, height);
+    beginShape();
+    for (int i = 0; i < 3; i++) {
+      float theta = radians(-1 * 90 + 120 * i);
+      vertex(width / 2 + width / 2 * cos(theta), height / 2 + height / 2 * sin(theta));
+    }
+    endShape(CLOSE);
+    popStyle();
+    
+    for (BeautifulObject obj:uiObjs) {
+      shape(obj.shape, obj.x, obj.y);
+    }
+
     if (targetObj != null) {
       pushStyle();
       noFill();
@@ -67,13 +84,11 @@ class ObjectEditor {
       sizeUpButton.display();
       sizeDownButton.display();
     }
-
-    for (BeautifulObject obj:uiObjs) {
-      shape(obj.shape, obj.x, obj.y);
-    }
+    
     if (phantomObj != null) {
       shape(phantomObj.shape, phantomObj.x, phantomObj.y);
     }
+    
   }
 
   void selectTargetObject() {
@@ -123,7 +138,9 @@ class ObjectEditor {
   void selectPhantomObject() {
     for (BeautifulObject obj:uiObjs) {
       if (obj.isMouseOver()) {
-        phantomObj = new BeautifulObject(obj.x, obj.y, obj.type, 60, shapeDefaultColors.get(obj.type));
+        phantomObj = new BeautifulObject(
+          obj.x, obj.y, obj.type, 100, color(shapeDefaultColors.get(obj.type), 180)
+        );
         targetObj = null;  // 重複選択を避けるため
       }
     }
@@ -137,6 +154,8 @@ class ObjectEditor {
 
   void embodyPhantomObject() {
     if (phantomObj != null) {
+      color embodyColor = color(red(phantomObj.c), green(phantomObj.c), blue(phantomObj.c));
+      phantomObj.setColor(embodyColor);
       objectController.addObject(phantomObj);
       phantomObj = null;
     }
