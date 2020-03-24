@@ -1,3 +1,5 @@
+// テクスチャーの描画とオブジェクトの管理
+
 class ObjectController {
   
   PGraphics texture;

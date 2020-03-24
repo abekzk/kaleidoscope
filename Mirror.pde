@@ -1,3 +1,5 @@
+// ミラーに関する描画
+
 class Mirror {
   PShape s;
   void display() {
@@ -5,6 +7,7 @@ class Mirror {
   }
 }
 
+// テクスチャーを貼った三角形のミラー
 class TriangleMirror extends Mirror {
 
   TriangleMirror(int x, int y, int r, int rad, PGraphics texture) {
@@ -13,6 +16,7 @@ class TriangleMirror extends Mirror {
     s.beginShape();
     s.texture(texture);
     s.stroke(50);
+    // 正三角形の頂点とテクスチャのマッピング
     for (int i = 0; i < 3; i++) {
       float theta = radians(rad - 90 + 120 * i);
       float thetaTexture = radians(0 - 90 + 120 * i);
