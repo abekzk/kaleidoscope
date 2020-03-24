@@ -1,3 +1,6 @@
+// エディターの描画・機能に関するクラス
+// ObjectControllerの利用が前提
+
 class ObjectEditor {
 
   ObjectController objectController;
@@ -163,6 +166,7 @@ class ObjectEditor {
 
 }
 
+// エディターで使うボタンのクラス
 class UIButton{
   int x;
   int y;

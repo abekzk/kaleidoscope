@@ -1,8 +1,10 @@
+// オブジェクト（具）の形と位置に関するクラス
+
 class BeautifulObject {
-  PShape shape;
+  PShape shape;  // 基本となる形
   int x;
   int y;
-  String type;
+  String type;  // 形のタイプを指定するために使う
   int size;
   color c;
 
@@ -15,6 +17,7 @@ class BeautifulObject {
     setShape();
   }
 
+  // ポジション以外ランダム
   BeautifulObject(int x, int y) {
     this(x, y,
       new String[]{"o", "d", "s", "h"}[int(random(4))],
@@ -23,6 +26,7 @@ class BeautifulObject {
     );
   }
 
+  // すべてランダム
   BeautifulObject() { this(int(random(50, width - 50)), int(random(50, height - 50))); }
 
   void setPos(int x, int y) {
@@ -45,6 +49,8 @@ class BeautifulObject {
     setShape();
   }
   
+  // プロパティをもとに形を描画
+  // 形を追加したい場合はここに描画
   void setShape() {
     noStroke();  // オブジェクトは基本的に輪郭線なし
     // 円

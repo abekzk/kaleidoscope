@@ -1,4 +1,7 @@
 // 万華鏡プログラム
+// オブジェクト（具）：丸や星型の図形
+// テクスチャ：オブジェクトを配置したり回転させたりするキャンバス
+// ミラー：テクスチャを貼り付けた図形（三角形）
 
 ObjectController objectController;
 ObjectEditor objectEditor;
@@ -13,16 +16,17 @@ void setup() {
 }
 
 void draw() {
-
+  // エディター画面
   if (isEdit) {
     background(255);
-    objectController.drawTexture(false);
+    objectController.drawTexture(false);  // テクスチャーを描画更新（アニメーションあり）
     image(objectController.texture, 0, 0);
     objectEditor.display();
-    //objectController.drawEditor();
-  }else {
+  }
+  // 鑑賞画面
+  else {
     background(0);
-    objectController.drawTexture(true);
+    objectController.drawTexture(true);  // テクスチャーを描画更新（アニメーションあり）
     // ミラーを表示
     for (Mirror mirror:mirrors) {
       mirror.display();
@@ -66,6 +70,7 @@ void keyPressed() {
   }
 }
 
+// ミラーの配置
 void initMirror() {
   int r = 150;
   for (int i = 0; i < 6; i++) {
